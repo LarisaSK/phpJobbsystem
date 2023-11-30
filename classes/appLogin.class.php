@@ -1,11 +1,12 @@
 <?php
-class appLogin extends Database {
+require_once "../include/dbConfig.inc.php";
+class appLogin  {
 
 
 public function getApplicant($email, $password) {
     try {
         // Establish a connection to the database
-        $pdo = $this->dbConnection();
+        $pdo = dbConnection();
 
         // Fetch hashed password from the database based on the provided email
         $query = "SELECT applicantID,firstName, lastName, email, password FROM job_applicant WHERE email = :email";
