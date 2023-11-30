@@ -1,5 +1,6 @@
 <?php
 
+
 class Database {
     
     protected function dbConnection() {

@@ -1,12 +1,12 @@
 <?php
 require_once "../include/session.inc.php";
 require_once "../include/dbConfig.inc.php";
-require_once "../classes/applSignup.class.php";
+require_once "../classes/appSignup.class.php";
 require_once "../include/empSignup.inc.php";
 
 
 
-class AppliSignupController extends AppliSignup{
+class appSignupController extends appSignup{
 
   protected $firstName;
   protected $lastName;
@@ -70,12 +70,12 @@ if ($this->checkEmptyFields()== true) {
     if ($errors) { //dersom det er feilmeldinger i errors matrisen skal disse vises  
         $_SESSION["signup_errors"] = $errors; //i signupView
     
-        header("Location: ../views/appliSignupView.php");
+        header("Location: ../views/appSignupView.php");
         exit();
     }
     {
         $_SESSION["signup_success"] = true;
-        header("Location: ../views/appliSignupView.php");
+        header("Location: ../views/appSignupView.php");
     $this->setApplicant($this->firstName,$this->lastName,$this->email,$this->city,$this->password);
 }
 }

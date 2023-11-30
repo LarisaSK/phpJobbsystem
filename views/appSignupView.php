@@ -1,9 +1,9 @@
 <?php
 include "../include/session.inc.php";
 include "../include/dbConfig.inc.php";
-include "../classes/applSignup.class.php";
-require_once "../include/checkErrors.php";
-$appliSignup = new AppliSignup();
+include "../classes/appSignup.class.php";
+require_once "../include/checkErrors.inc.php";
+$appSignup = new appSignup();
 
 // Gi tilbakemelding dersom brukeren ble registrert (session[signup_success]=== true)
 if (isset($_SESSION["signup_success"]) && $_SESSION["signup_success"] === true) {
@@ -29,10 +29,10 @@ if (isset($_SESSION["signup_success"]) && $_SESSION["signup_success"] === true) 
     <div class="form-container">
     <!-- Employer sign Up Form -->
 
-    <form id="signupForm" action="../include/appliSignup.inc.php" method="post">
+    <form id="signupForm" action="../include/appSignup.inc.php" method="post">
 
         <h2>Jobbsøker registrering</h2> <a href="empLoginView.php"> Er du arbeidsgiver?</a>
-         <p>Jobbsøker Login<a href="appliLoginView.php"> her</a></p> 
+         <p>Jobbsøker Login<a href="appLoginView.php"> her</a></p> 
         <label for="firstName">Fornavn:<font color="red">*</font></label>
         <input type="text" id="firstName" name="firstName">
 
@@ -54,7 +54,7 @@ if (isset($_SESSION["signup_success"]) && $_SESSION["signup_success"] === true) 
  <label for="selectCity">City (Vest-Agder):<font color="red">*</font></label>
             <select id="selectCity" name="city">
             <?php
-                $locations = $appliSignup->getAllLocation();
+                $locations = $appSignup->getAllLocation();
                 if ($locations) {
                     foreach ($locations as $location) {
                         echo '<option value="' . $location->locationID . '">' . $location->locationName . '</option>';

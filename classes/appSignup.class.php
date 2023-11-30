@@ -1,7 +1,7 @@
 <?php
 
 
-class AppliSignup extends Database {
+class appSignup extends Database {
 
     protected function getExistingEmails($email) {
         try {
