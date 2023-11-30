@@ -14,17 +14,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"])){
         $password = htmlentities($_POST["password"], ENT_QUOTES, 'UTF-8');
         $cpassword = htmlentities($_POST["cpassword"], ENT_QUOTES, 'UTF-8');
 
-        //initialiserer appliSignup controller klassen fra kontrolleren
+        //initialiserer appSignup controller klassen fra kontrolleren
 require_once "../include/dbConfig.inc.php";
-include "../classes/applSignup.class.php";
-include "../controllers/appliSignup.con.php";
+include "../classes/appSignup.class.php";
+include "../controllers/appSignup.con.php";
 
 
-$appliSignup= new appliSignupController($firstName, $lastName, $email, $city,$password, $cpassword);
+$appSignup= new appSignupController($firstName, $lastName, $email, $city,$password, $cpassword);
 
 
 //validering av input
-$appliSignup->signupUser(); //signupUser function from the controller
+$appSignup->signupUser(); //signupUser function from the controller
 
 }
 

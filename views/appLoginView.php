@@ -1,3 +1,11 @@
+<?php
+include "../include/session.inc.php";
+include "../include/dbConfig.inc.php";
+include "../classes/appLogin.class.php";
+include "../include/checkErrors.inc.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +15,17 @@
     <title>Sign Up Forms</title>
 </head>
 <body>
+<?php
+    checkLoginErrors(); //kaller funksjonen som viser eventuelle feilmeldinger
+    ?>
 <div class="header">
        
     </div>
     <div class="form-container">
     <!-- Applicant login Form -->
-    <form id="signupForm" action="../include/appliLogin.inc.php" method="post">
+    <form id="signupForm" action="../include/appLogin.inc.php" method="post">
         <h2>Jobbsøker Log inn</h2>
- <p>Jobbsøker registrering<a href="appliSignupView.php"> her</a></p>
+ <p>Jobbsøker registrering<a href="appSignupView.php"> her</a></p>
         <label for="email">E-mail:<font color="red">*</font></label>
         <input type="text" id="email" name="email">
 
