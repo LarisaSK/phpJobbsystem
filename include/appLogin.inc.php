@@ -1,6 +1,8 @@
 <?php
 include "../include/session.inc.php";
-
+require_once "../include/dbConfig.inc.php";
+include "../classes/appLogin.class.php";
+include "../controllers/appLogin.con.php";
 
 //sjekker at brukeren har sendt formen ved hjelp av post metode
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"])){
@@ -12,9 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"])){
    
 
         //initialiserer appLogin controller klassen fra kontrolleren
-require_once "../include/dbConfig.inc.php";
-include "../classes/appLogin.class.php";
-include "../controllers/appLogin.con.php";
+
 
 
 $appLogin= new appLoginController( $email,$password);

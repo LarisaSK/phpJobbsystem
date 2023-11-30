@@ -1,9 +1,9 @@
 <?php
 
 
-class Database {
+
     
-    protected function dbConnection() {
+function dbConnection() {
     try {
             $dbHost = "localhost";
             $dbUsername = "root";
@@ -22,5 +22,5 @@ class Database {
             die("Connection failed: " . $e->getMessage());
         }
     }
-}
+
 ?>

@@ -1,11 +1,12 @@
 <?php
+require_once "../include/dbConfig.inc.php";
 
 
-class appSignup extends Database {
+class appSignup  {
 
     protected function getExistingEmails($email) {
         try {
-            $pdo = $this->dbConnection();
+            $pdo = dbConnection();
     
             // Check if the email exists in either the employer or job_applicant table
             $query = "SELECT email FROM employer WHERE email = :email
@@ -41,7 +42,7 @@ class appSignup extends Database {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
             // Establish a connection to the database
-            $pdo = $this->dbConnection();
+            $pdo = dbConnection();
     
             // Prepare INSERT query for registration
             $query = "INSERT INTO job_applicant (firstName, lastName, email, applicantLocationID, password) 
@@ -72,7 +73,7 @@ class appSignup extends Database {
 
     public function getAllLocation() {
         try {
-            $pdo = $this->dbConnection();
+            $pdo = dbConnection();
 
             $query = "SELECT * FROM location";
             $stmt = $pdo->prepare($query);
