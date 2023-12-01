@@ -29,7 +29,7 @@ if (isset($_SESSION["signup_success"]) && $_SESSION["signup_success"] === true) 
     <div class="form-container">
     <!-- Employer sign Up Form -->
 
-    <form id="signupForm" action="../include/appSignup.inc.php" method="post">
+    <form id="signupForm" action="../include/appSignup.con.php" method="post">
 
         <h2>Jobbsøker registrering</h2> <a href="empLoginView.php"> Er du arbeidsgiver?</a>
          <p>Jobbsøker Login<a href="appLoginView.php"> her</a></p> 
