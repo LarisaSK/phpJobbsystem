@@ -41,7 +41,7 @@
             echo '<option value="' . $location->locationID . '">' . $location->locationName . '</option>';
         }
     } else {
-        echo '<option value="" disabled>No locations available</option>';
+        echo '<option value="" disabled>ingen lokasjoner tilgjengelig</option>';
     }
     ?>
             </select>
