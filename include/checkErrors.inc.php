@@ -16,12 +16,6 @@ echo "<p>". $error."</p>";
 
         unset($_SESSION["signup_errors"]);
     }
-    else if(isset($_GET["signup"]) && $_GET["signup"] ==="success"){
-echo "<br>";
-echo "signup Success";
-
-
-    }
   }
 
   //Denne funksjonen sjekker om det finnes noen errors i error matrisen som
@@ -39,6 +33,5 @@ echo "<p>". $error."</p>";
 
       unset($_SESSION["login_errors"]);
   }
-
   }
 ?>

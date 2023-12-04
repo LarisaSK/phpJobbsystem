@@ -23,15 +23,13 @@ class appSignup  {
             return $stmt->rowCount() > 0;
     
         } catch (Exception $e) {
-            // Log the exception, display an error message, or take other appropriate action
-            // You might redirect the user to an error page or display an error message.
-            // For demonstration purposes, we are echoing the error message.
+        
             echo "Error: " . $e->getMessage();
             return false;
         }
     }
 
-    public function setApplicant($firstName, $lastName, $email, $city, $password) {
+    public  function setApplicant($firstName, $lastName, $email, $city, $password) {
         try {
             // Check if the email already exists
             if ($this->getExistingEmails($email)) {
@@ -71,7 +69,7 @@ class appSignup  {
     }
     
 
-    public function getAllLocation() {
+    public static function getAllLocation() {
         try {
             $pdo = dbConnection();
 
@@ -87,9 +85,6 @@ class appSignup  {
             }
 
         } catch (Exception $e) {
-            // Log the exception, display an error message, or take other appropriate action
-            // You might redirect the user to an error page or display an error message.
-            // For demonstration purposes, we are echoing the error message.
             echo "Error: " . $e->getMessage();
             return false;
         }
