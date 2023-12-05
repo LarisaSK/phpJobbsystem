@@ -55,10 +55,10 @@
 <body>
   <div class ="topnav">
     <!--Må legge til følgene filer til sidene-->
-        <a href="#logg_ut">Logg Ut</a>
+        <a href="appLoginView.php">Logg Ut</a>
         <a href="#Jobb_profil">Min profil</a>
-        <a href="appliDachboardView.php">Ledige stillinger</a>
-        <a href="appliCvView.php">Min CV</a>
+        <a href="appDachboardView.php">Ledige stillinger</a>
+        <a href="appCvView.php">Min CV</a>
         <input type="text" placeholder="Søk..">
     </div>
   </div>
