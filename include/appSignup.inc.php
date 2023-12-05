@@ -4,6 +4,8 @@ require_once "../include/dbConfig.inc.php";
 include "../classes/appSignup.class.php";
 include "../controllers/appSignup.con.php";
 
+//selvNotat: husk å overføre dette til appsignupController istedenfor
+
 //sjekker at brukeren har sendt formen ved hjelp av post metode
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"])){
 

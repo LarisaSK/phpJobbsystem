@@ -1,54 +1,54 @@
 <?php
-include "../include/session.inc.php";
-include "../include/dbConfig.inc.php";
-include "../classes/appSignup.class.php";
-require_once "../include/checkErrors.inc.php";
-$appSignup = new appSignup();
 
-// Gi tilbakemelding dersom brukeren ble registrert (session[signup_success]=== true)
-if (isset($_SESSION["signup_success"]) && $_SESSION["signup_success"] === true) {
-    echo '<p>Vellykket registrering! Vennligst logg inn.</p>';
-    unset($_SESSION["signup_success"]); // Clear the success flag
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>Sign Up Forms</title>
+    
+    
 </head>
 <body>
-<?php
-    checkSignupErrors();
-    ?>
-<div class="header">
-       
-    </div>
+
     <div class="form-container">
-    <!-- Registrering for arbeidsgivere -->
+    <form id="signupForm" action="../../controllers/user.con.php" method="post">
 
-    <form id="signupForm" action="../include/appSignup.inc.php" method="post">
-
-        <h2>Jobbsøker registrering</h2> <a href="empLoginView.php"> Er du arbeidsgiver?</a>
-         <p>Jobbsøker Login<a href="appLoginView.php"> her</a></p> 
         <label for="firstName">Fornavn:<font color="red">*</font></label>
         <input type="text" id="firstName" name="firstName">
 
         <label for="lastName">Etternavn:<font color="red">*</font></label>
         <input type="text" id="lastName" name="lastName">
 
+ <label for="description">Fortell om  erfaring:<font color="red">*</font></label>
+        <input type="text" id="description" name="description">
+
+               <!-- Dropdown for skills -->
+<label for="selectSkill">Ferdigheter:<font color="red">*</font></label>
+<select id="selectSkill" name="skill">
+    <?php
+    $skills = $user::getAllSkills(); //fyller dropdown med skills fra databasen
+    if ($skills) {
+        foreach ($skills as $skill) {
+            // Include the missing closing angle bracket and use skillName as both value and displayed text
+            echo '<option value="' . $skill->skillName . '">' . $skill->skillName . '</option>';
+        }
+    } else {
+        echo '<option value="" disabled>Ingen ferdigheter tilgjengelig</option>';
+    }
+    ?>
+</select>
+           
+
         <label for="email">E-mail:<font color="red">*</font></label>
         <input type="text" id="email" name="email">
 
  
-        <label for="password">Lag passord:<font color="red">*</font></label>
-        <input type="password" id="password" name="password">
+        <label for="phoneNumber">Mobilnummer:<font color="red">*</font></label>
+        <input type="text" id="phoneNumber" name="phoneNumber">
 
-        <label for="cpassword">Bekreft passord:<font color="red">*</font></label>
-        <input type="password" id="cpassword" name="cpassword">
-
+       
         <!-- Dropdown for byer i Vest-Agder -->
       
  <label for="selectCity">City (Vest-Agder):<font color="red">*</font></label>

@@ -109,7 +109,7 @@ require_once "../include/dbConfig.inc.php";
         <label for="startDate">Startdato:</label>
         <input type="date" id="startDate" name="startDate" novalidate>
 
-        <!-- Adresse -->
+        <!-- by: her bruker jeg getAllLocations funksjon fra applicant Signup klasse-->
         <label for="city">By:</label>
         <div>
         <select id="city" name="city" novalidate>

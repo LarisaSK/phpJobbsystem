@@ -7,22 +7,25 @@ $appSignup = new appSignup();
 
 class jobPost
 {
-    public static function getAllJobPositions()
+
+    //denne funksjonen henter alle stillinger fra position tabell slik at arbeidsgiver
+    //kan velge hvilken stilling de utlyser for
+ public static function getAllJobPositions()
     {
-        try {
-            $pdo = dbConnection();
+try {
+     $pdo = dbConnection();
 
             $query = "SELECT positionName FROM position";
             $stmt = $pdo->prepare($query);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-            if ($stmt->rowCount() > 0) {
+    if ($stmt->rowCount() > 0) {
                 return $result;
-            } else {
+    } else {
                 throw new Exception("No positions found");
             }
-        } catch (Exception $e) {
+} catch (Exception $e) {
             echo "Error: " . $e->getMessage();
             return false;
         }
@@ -59,10 +62,10 @@ class jobPost
             //henter den nyeste jobPostID-en i tabellen for å bekrefte
             //at den har økt med en
             $lastInsertId = $pdo->lastInsertId();
-            if ($lastInsertId > 0) {
+     if ($lastInsertId > 0) {
                 // returner success melding 
                 return ['success' => true, 'message' => 'Annonsen er lagt ut.'];
-            } else {
+    } else {
                 // eller returnerer feilmelding 
                 throw new Exception("Greide ikke å legge ut annonsen.");
             }
@@ -72,9 +75,11 @@ class jobPost
         }
     }
 
+    //denne funksjonen henter ID, Tittlel, stilling og by fra alle annonser i db
+ //for å vise i jobPostListView
     public static function ListPublishedJobPosts()
     {
-        try {
+ try {
 
             $pdo = dbConnection();
             $query = "SELECT jp.jobPostingID, jp.jobTitle, jp.positionName, lt.locationName
@@ -84,22 +89,22 @@ class jobPost
             $stmt = $pdo->prepare($query);
             $stmt->execute();
 
-            // Fetch all rows as an associative array
+            // Henter alle annonser som en assosiativ matrise
             $jobPostList = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if($jobPostList){
+     if($jobPostList){
                 return $jobPostList; 
             }
-            else {
+      else {
        
                 throw new Exception("Fant ingen jobb annonser.");
             }
-        } catch (Exception $e) {
+} catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
     public static function DetailedJobPostById($jobPostID){
-        try {
+try {
            //Denne spørringen henter detaljert informasjon om en jobbannonse, 
            //inkludert lokasjonsnavnet, 
            //ved å koble  tabeller jobPosting og location basert på jobbannonse-ID-en.
@@ -115,18 +120,15 @@ class jobPost
             $jobPost = $stmt->fetch(PDO::FETCH_ASSOC);
 
            // var_dump($jobPost);
-            if($jobPost) { //hvis annonse info ble hentet skal den returneres
+      if($jobPost) { //hvis annonse info ble hentet skal den returneres
                 return $jobPost;
               
-            } else {
+     } else {
                 throw new Exception("Fant ikke jobb annonsen");
             }
-        } catch (Exception $e) {
+} catch (Exception $e) {
             echo "Error: " . $e->getMessage();
            
         }
     }
-
-
-
 }

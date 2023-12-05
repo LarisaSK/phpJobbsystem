@@ -4,6 +4,8 @@ require_once "../include/dbConfig.inc.php";
 include "../classes/appLogin.class.php";
 include "../controllers/appLogin.con.php";
 
+//selvNotat: husk å overføre dette til appLogin Controller istedenfor
+
 //sjekker at brukeren har sendt formen ved hjelp av post metode
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"])){
 
