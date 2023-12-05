@@ -1,7 +1,7 @@
 <?php 
-include "../views/appTopnavView.inc.html"
-include "../classes/appCV.class.php"
-include "../include/session.inc.php"
+include '../views/appTopnavView.inc.html';
+include '../classes/appCV.class.php';
+include '../include/session.inc.php';
 ?>
 
 <!DOCTYPE html>

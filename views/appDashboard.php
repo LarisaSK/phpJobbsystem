@@ -1,6 +1,6 @@
 
 <?php 
-include "../views/appTopnavView.inc.html"
+include '../views/appTopnavView.php';
 ?>
 
 <!DOCTYPE html>
