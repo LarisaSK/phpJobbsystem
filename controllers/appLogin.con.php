@@ -52,7 +52,7 @@ if ($this->checkEmptyFields()== true) {
     $_SESSION["lastName"] = $applicantData["lastName"];
 
     //logg inn jobbsøker til "ledige stillinger"-siden
-    header("Location: ../views/appDashboard.php");
+    header("Location: ../views/jobListingView.php");
     exit();
 
    }

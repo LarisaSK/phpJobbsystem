@@ -4,7 +4,7 @@ require_once "../include/errorHandler.inc.php";
 require_once "../classes/jobPost.class.php";
 
 
-
+//validerer og lagrer jobb annonse
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["publishJobPost"])){
 
 
@@ -15,37 +15,46 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["publishJobPost"])){
         'companyName'        => htmlentities($_POST["companyName"], ENT_QUOTES, 'UTF-8'),
         'positionName'    => htmlentities($_POST["positionName"], ENT_QUOTES, 'UTF-8'),
         'jobDescription'   => htmlentities($_POST["jobDescription"], ENT_QUOTES, 'UTF-8'),
-        'employmentType'   => htmlentities($_POST["employmentType"], ENT_QUOTES, 'UTF-8'), // Assuming you want to store "fullTime" or "partTime"
-        'deadline'         => htmlentities($_POST["deadline"], ENT_QUOTES, 'UTF-8'),
-        'startDate'        => htmlentities($_POST["startDate"], ENT_QUOTES, 'UTF-8'),
+        'employmentType'   => htmlentities($_POST["employmentType"], ENT_QUOTES, 'UTF-8'), 
+        'deadline'        => DateTime::createFromFormat('Y-m-d',$_POST["deadline"]),// for at datoene skal være i formen 'YYYY-MM-DD 
+        'startDate'       => DateTime::createFromFormat('Y-m-d',$_POST["startDate"]),//når jeg oppretter dateTime objekter i isValidDate funksjonen
         'city'             => htmlentities($_POST["city"], ENT_QUOTES, 'UTF-8'),
         'address'          => htmlentities($_POST["address"], ENT_QUOTES, 'UTF-8'),
     ];
 
-    //valderer input og viser nødvendige feilmeldinger ved å kalle på funksjoner i 
-    //validateFunctions og errorHandler.  (disse er static derfor kan de kalles slik)
-if (Validator::areEmptyFields($formFields)){
-ErrorHandler::checkForError();
-}
-else{
-//hvis formen er riktig utfylt skal saveJobPost fra modellen 
-    $result = JobPost::saveJobPost($formFields); //
+ // Validerer inndata og viser nødvendige feilmeldinger ved å kalle på funksjoner i 
+// validateFunctions og errorHandler (disse er statiske, derfor kan de kalles slik)
+if (Validator::areEmptyFields($formFields)) {
+    ErrorHandler::checkForError();
 
-if ($result['success']) {
-    // viser sucess melding til arbeidsgiver
-    echo $result['message'];
+} elseif (!Validator::isValidDate($formFields)) {
+    ErrorHandler::checkForError();
 } else {
-    // viser feilmelding arbeidsgiver
-    echo $result['message'];
+    // Hvis skjemaet er riktig utfylt, kall saveJobPost fra modellen
+    $jobPostSaved = JobPost::saveJobPost($formFields);
+
+         if ($jobPostSaved['success']) {
+        // Vis suksessmelding til arbeidsgiver
+        echo $jobPostSaved['message'];
+            } else {
+        // Vis feilmelding til arbeidsgiver
+        echo $jobPostSaved['message'];
+        }
+    }
 }
+//kaller på ListPublishedJobPosts funksjonen i jobPost klassen for å vise liste over 
+//annonser i jobPostListingView
+$jobPostList = jobPost::ListPublishedJobPosts();
+
+
+//denne GET-metoden startes når jobbsøker trykker på se Detaljer-linken for en annonse
+//i jobPostListingView.php
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["jobPostingID"])) {
+    // Henter detaljert informasjon om en spesifikk jobbannonse basert på  id
+    $jobPostID = $_GET["jobPostingID"];
+    $detailedJobPostMethod = JobPost::DetailedJobPostById($jobPostID);
+
+    
 }
-
-
-
-
-}
-
-
-
 
 ?>

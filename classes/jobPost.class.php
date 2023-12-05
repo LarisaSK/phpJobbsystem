@@ -48,8 +48,8 @@ class jobPost
             $stmt->bindParam(':positionName', $formFields['positionName']);
             $stmt->bindParam(':employmentType',$formFields['employmentType']);
             $stmt->bindParam(':jobDescription', $formFields['jobDescription']);
-            $stmt->bindParam(':deadline', $formFields['deadline']);
-            $stmt->bindParam(':startDate', $formFields['startDate']);
+            $stmt->bindValue(':deadline', $formFields['deadline']->format('Y-m-d'));
+            $stmt->bindValue(':startDate', $formFields['startDate']->format('Y-m-d'));
             $stmt->bindParam(':locationID', $formFields['city']);
             $stmt->bindParam(':address', $formFields['address']);
 
@@ -63,13 +63,70 @@ class jobPost
                 // returner success melding 
                 return ['success' => true, 'message' => 'Annonsen er lagt ut.'];
             } else {
-                // If not, show an error message
+                // eller returnerer feilmelding 
                 throw new Exception("Greide ikke å legge ut annonsen.");
             }
         } catch (Exception $e) {
-            // If an exception occurs, catch it and return an error message
+      // dersom annonsen ikke lagres vis feilmelding
             return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
         }
     }
+
+    public static function ListPublishedJobPosts()
+    {
+        try {
+
+            $pdo = dbConnection();
+            $query = "SELECT jp.jobPostingID, jp.jobTitle, jp.positionName, lt.locationName
+            FROM job_posting AS jp
+            INNER JOIN location AS lt ON jp.locationID = lt.locationID;
+            ";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+
+            // Fetch all rows as an associative array
+            $jobPostList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($jobPostList){
+                return $jobPostList; 
+            }
+            else {
+       
+                throw new Exception("Fant ingen jobb annonser.");
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public static function DetailedJobPostById($jobPostID){
+        try {
+           //Denne spørringen henter detaljert informasjon om en jobbannonse, 
+           //inkludert lokasjonsnavnet, 
+           //ved å koble  tabeller jobPosting og location basert på jobbannonse-ID-en.
+            $pdo = dbConnection();
+            $query = "SELECT jp.*, lt.locationName
+            FROM job_posting AS jp
+            INNER JOIN location AS lt ON jp.locationID = lt.locationID
+            WHERE jp.jobPostingID = :jobPostingID;";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':jobPostingID', $jobPostID);
+            $stmt->execute();
+            // henter hele annonsen som en array
+            $jobPost = $stmt->fetch(PDO::FETCH_ASSOC);
+
+           // var_dump($jobPost);
+            if($jobPost) { //hvis annonse info ble hentet skal den returneres
+                return $jobPost;
+              
+            } else {
+                throw new Exception("Fant ikke jobb annonsen");
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+           
+        }
+    }
+
+
 
 }

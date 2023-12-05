@@ -17,7 +17,6 @@ require_once "../include/dbConfig.inc.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobbannonseutlysning</title>
     <style>
-        /* Legg til egendefinerte stiler her */
         label {
             display: block;
             margin-bottom: 8px;
@@ -129,10 +128,6 @@ require_once "../include/dbConfig.inc.php";
 
         <label for="address">Gateadresse:</label>
         <input type="text" id="address" name="address" novalidate>
-
-        <!-- Bedriftsnavn med link til bedriftsprofil -->
-        <label for="companyName">Bedriftsnavn:</label>
-        <a href="lenke_til_bedriftsprofil.html" target="_blank">Lenke til bedriftsprofil</a>
         <br>
         <input type="submit" value="Legg ut annonse" name="publishJobPost">
     </form>
