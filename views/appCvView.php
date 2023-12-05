@@ -37,8 +37,9 @@ include "../classes/appCV.class.php"
     <label for="skills">Ferdigheter:</label>
     <input type="text" name="skills" required>
 
-    <input type="submit" value="Send CV">
+    <input type="submit" value="Lagre CV">
 </form>
+<?php endforeach; ?>
 
 </body>
 </html>
