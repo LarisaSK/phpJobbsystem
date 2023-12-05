@@ -2,10 +2,10 @@
 <?php
 require_once "../include/dbConfig.inc.php";
 
-class getExistingData {
-    protected function getCVData($firstName, $lastName, $email, $phoneNumber, $applicantID) {
-        try {
-            $pdo = $this->dbConnection():
+class getExistingData 
+{   protected function getCVData($firstName, $lastName, $email, $phoneNumber, $applicantID) 
+    {   try 
+        {   $pdo = $this->dbConnection():
 
             $query = "SELECT firstName, lastName, email, phoneNumber FROM job_applicant WHERE id =: applicantID";
             $stmt = $db->prepare($query);
@@ -21,16 +21,7 @@ class getExistingData {
 
             }
         }
-
-       /* if ($result) {
-            $cvData = $result->fetch_assoc();
-            $result->free();
-            $mysqli->close();
-            return $cvData;
-        } else {
-            // Håndter feil her
-            return null;
-        }
-    }*/
+    }
 }
+
 ?>
