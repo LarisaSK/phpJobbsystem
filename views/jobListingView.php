@@ -1,5 +1,5 @@
 <?php
-echo "her skal listen over jobber være";
+
 require_once "../controllers/jobPost.con.php";
  
 ?>
@@ -18,9 +18,28 @@ require_once "../controllers/jobPost.con.php";
             padding: 10px;
             margin-bottom: 10px;
         }
+
+        .header-box {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the header links */
+        .header-box a {
+            margin-right: 100px; /* Adjust the value as needed */
+            
+            
+        }
     </style>
 </head>
 <body>
+<div class="header-box">
+        <a href="./profiles/appProfileView.php">PROFIL</a>
+        <a href="jobListingView.php">JOBBANNONSER</a>
+</div>
 
 <?php
 //refererer til $jobPostList i kontrolleren som inneholder jobPostList fra modellen

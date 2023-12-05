@@ -2,17 +2,18 @@
 
 require_once "../controllers/jobPost.con.php";
 
-// Check if the jobPostID is provided in the URL
+// // sjekker om jobPostingID for annonsen finnes i URL-en
 if (isset($_GET['jobPostingID'])) {
     $jobPostID = $_GET['jobPostingID'];
 
-    // Retrieve detailed job post information
+    // kjører metoden for å hente detaljert jobbannonse
     $detailedJobPostMethod = JobPost::DetailedJobPostById($jobPostID);
 
-    // Check if the detailed job post information is available
+    // sjekker om dataen ble returnert
     if ($detailedJobPostMethod) {
-        // Display detailed job post information
+        // Viser detaljert data til jobbsøker
         echo '<div class="job-post">';
+        echo '<form action="applyForJobPostView.php" method="post">';
         echo '<h2>' . $detailedJobPostMethod['jobTitle'] . '</h2>';
         echo '<p><strong>Bedrift:</strong> ' . $detailedJobPostMethod['companyName'] . '</p>';
         echo '<p><strong>Stilling:</strong> ' . $detailedJobPostMethod['positionName'] . '</p>';

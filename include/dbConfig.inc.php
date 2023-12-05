@@ -1,7 +1,8 @@
 <?php
 
 
-
+//denne funksjonen etablerer koblin med databasen og skal inkluderes i alle 
+//spørringer mot databasen
     
 function dbConnection() {
     try {
@@ -12,7 +13,7 @@ function dbConnection() {
 
             $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUsername, $dbPassword);
             
-            // Set PDO to throw exceptions on errors
+            
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
             echo "Connection success!";

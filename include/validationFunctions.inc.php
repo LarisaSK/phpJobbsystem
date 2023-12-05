@@ -40,6 +40,29 @@ class Validator
   
       return $result;
   }
+
+  public static function fullNameIsValid($formFields) {
+    $result=false;
+    if( !preg_match('/^[a-zA-Z]+$/',$formFields["firstName"]) 
+    || !preg_match('/^[a-zA-Z]+$/',$formFields["lastName"])){
+      ErrorHandler::addError("navn kan kun bestå av bokstaver");
+$result = true;
+     }  
+  return   $result;
+}
+  
+
+//validateEmail-funksjonen sjekker om email er fylt ut korrekt dersom det ikke er tomt
+public static function validateEmail($formFields) {
+$result=false;   
+if ((!empty($formFields["email"])) &&
+ (!filter_var($formFields["email"], FILTER_VALIDATE_EMAIL) ||
+  !preg_match("/\.(com|no)$/", $formFields["email"]))) {
+    ErrorHandler::addError("Ugyldig Epost");
+    $result=true;   //Ugyldig epost adresse 
+} 
+return  $result;
+}
   
 
 

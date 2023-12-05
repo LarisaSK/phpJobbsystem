@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["publishJobPost"])){
 
 
     $formFields = [
-        // Take data from the job posting form and store them in variables for validation
+        // henter data fra jobPosting form for validering og lagring
         'jobTitle'        => htmlentities($_POST["jobTitle"], ENT_QUOTES, 'UTF-8'),
         'companyName'        => htmlentities($_POST["companyName"], ENT_QUOTES, 'UTF-8'),
         'positionName'    => htmlentities($_POST["positionName"], ENT_QUOTES, 'UTF-8'),
@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["publishJobPost"])){
         'address'          => htmlentities($_POST["address"], ENT_QUOTES, 'UTF-8'),
     ];
 
- // Validerer inndata og viser nødvendige feilmeldinger ved å kalle på funksjoner i 
+ // Validerer bruker input  og viser nødvendige feilmeldinger ved å kalle på funksjoner i 
 // validateFunctions og errorHandler (disse er statiske, derfor kan de kalles slik)
 if (Validator::areEmptyFields($formFields)) {
     ErrorHandler::checkForError();
@@ -56,5 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["jobPostingID"])) {
 
     
 }
+
+
 
 ?>
