@@ -1,7 +1,5 @@
 <?php
 
-
-
     
 function dbConnection() {
     try {

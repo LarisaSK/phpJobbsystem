@@ -1,19 +1,20 @@
 <?php
-require_once 'appCV.class.php';
+require_once '../class/appCV.class.php';
+require_once "../include/dbConfig.inc.php";
 
-/*class CVController {
+class CVController {
     public function showCV($userId) {
         $cvModel = new CVModel();
         $cvData = $cvModel->getCVData($userId);
 
         // Send CV-data til visningen
-        require 'view.php';
+        require 'appCvView.php';
     }
 }
 
-// Eksempel på bruk av kontrolleren
+
 $cvController = new CVController();
-$cvController->showCV(1); // Brukerens ID */
+$cvController->showCV(1); // Brukerens ID
 
 
  

@@ -1,5 +1,6 @@
 <?php 
 include "../views/appTopnavView.inc.html"
+include "../classes/appCV.class.php"
 ?>
 
 <!DOCTYPE html>
@@ -13,15 +14,19 @@ include "../views/appTopnavView.inc.html"
 
 <h2>CV-skjema</h2>
 
-<form action="handle_cv.php" method="post">
-    <label for="name">Navn:</label>
-    <input type="text" name="name" required>
+<?php foreach ($job_applicant as $applicantID)?>
+<form action="appCV.con.php" method="post">
+    <label for="firstname">Fornavn:</label>
+    <input type="text" name="firstname" value="<?php echo $cvData['firstName']; ?>" required>
+
+    <label for="lastname">Etternavn:</label>
+    <input type="text" name="lastname"value="<?php echo $cvData['lastName']; ?>" required>
 
     <label for="email">E-post:</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email" value="<?php echo $cvData['email']; ?>" required>
 
     <label for="phone">Telefon:</label>
-    <input type="tel" name="phone">
+    <input type="tel" name="phone" value="<?php echo $cvData['phoneNumber']; ?>">
 
     <label for="education">Utdanning:</label>
     <textarea name="education" rows="4" required></textarea>

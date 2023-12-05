@@ -1,25 +1,28 @@
 
 <?php
+require_once "../include/dbConfig.inc.php";
 
 class getExistingData {
-    protected function getCVData($firstname, $lastname, $email) {
+    protected function getCVData($firstName, $lastName, $email, $phoneNumber, $applicantID) {
         try {
             $pdo = $this->dbConnection():
 
-            $query = "SELECT firstname, lastname, email FROM job_applicant"
+            $query = "SELECT firstName, lastName, email, phoneNumber FROM job_applicant WHERE id =: applicantID";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':applicantID', $applicantID);
+            $stmt->execute();
+
+            $cvData = $stmt ->fetchALL(PDO::FETCH_ASSOC);
+            {
+                catch (PDOExecption $e)
+                {
+                    echo "feil ved tilkoblinf: " . $e->getMessage();
+                }
+
+            }
         }
 
-
-
-        // Legg til databasekoden for å hente CV-data basert på brukerens ID
-        // Bytte til riktig databasekobling
-        $mysqli = new mysqli("localhost", "brukernavn", "passord", "database");
-        $userId = $mysqli->real_escape_string($userId);
-
-        $query = "SELECT fornavn, etternavn, epost, sted FROM cv_data WHERE user_id = $userId";
-        $result = $mysqli->query($query);
-
-        if ($result) {
+       /* if ($result) {
             $cvData = $result->fetch_assoc();
             $result->free();
             $mysqli->close();
@@ -28,6 +31,6 @@ class getExistingData {
             // Håndter feil her
             return null;
         }
-    }
+    }*/
 }
 ?>
