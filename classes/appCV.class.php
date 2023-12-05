@@ -16,7 +16,7 @@ class getExistingData
             {
                 catch (PDOExecption $e)
                 {
-                    echo "feil ved tilkoblinf: " . $e->getMessage();
+                    echo "feil ved tilkobling: " . $e->getMessage();
                 }
 
             }
