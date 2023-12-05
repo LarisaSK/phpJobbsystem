@@ -15,7 +15,7 @@ include '../include/session.inc.php';
 
 <h2>CV-skjema</h2>
 
-<?php foreach ($job_applicant as $applicantID)?>
+
 <form action="appCV.con.php" method="post">
     <label for="firstname">Fornavn:</label>
     <input type="text" name="firstname" value="<?php echo $cvData['firstName']; ?>" required>
@@ -40,7 +40,7 @@ include '../include/session.inc.php';
 
     <input type="submit" value="Lagre CV">
 </form>
-<?php endforeach; ?>
+
 
 </body>
 </html>
